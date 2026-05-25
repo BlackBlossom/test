@@ -1,0 +1,741 @@
+Perfect.
+Now we’ll cover the FINAL major DevOps theory + practical integration topics in your syllabus:
+
+# SonarQube + OPA (Open Policy Agent)
+
+These are usually:
+
+* MCQ-heavy
+* concept-based
+* simple practical syntax questions
+* CI/CD integration questions
+
+And based on your faculty pattern, they will likely ask:
+
+* purpose
+* workflow
+* keywords
+* integration with pipelines
+
+NOT enterprise-level deep implementation.
+
+---
+
+# PART 1 — SONARQUBE
+
+---
+
+# What is SonarQube?
+
+SonarQube is:
+
+# a Static Code Analysis Tool
+
+Used for:
+
+* code quality analysis
+* bug detection
+* vulnerability detection
+* maintainability checks
+
+---
+
+# MOST IMPORTANT EXAM DEFINITION
+
+SonarQube:
+
+> analyzes source code without executing it.
+
+This is:
+
+# Static Analysis
+
+VERY HIGH probability MCQ.
+
+---
+
+# PART 2 — Why SonarQube?
+
+Without SonarQube:
+
+```text id="sq1"
+Hidden bugs ❌
+Security vulnerabilities ❌
+Poor code quality ❌
+Technical debt ❌
+```
+
+---
+
+# With SonarQube
+
+```text id="sq2"
+Automatic quality checks ✅
+Bug detection ✅
+Security scanning ✅
+Code quality metrics ✅
+```
+
+---
+
+# PART 3 — Key SonarQube Concepts
+
+EXTREMELY IMPORTANT.
+
+---
+
+# 1. Bugs
+
+Potential coding errors.
+
+Example:
+
+* null pointer issue
+* wrong logic
+
+---
+
+# 2. Vulnerabilities
+
+Security issues.
+
+Example:
+
+* SQL injection
+* hardcoded passwords
+
+---
+
+# 3. Code Smells
+
+Bad coding practices.
+
+Example:
+
+* duplicate code
+* huge functions
+* unreadable logic
+
+VERY HIGH probability MCQ.
+
+---
+
+# 4. Technical Debt
+
+Future maintenance cost caused by poor code.
+
+---
+
+# 5. Quality Gate (VERY IMPORTANT)
+
+A set of rules deciding:
+
+# PASS or FAIL
+
+Example:
+
+* no critical vulnerabilities
+* code coverage > 80%
+
+---
+
+# MOST IMPORTANT CONCEPT
+
+Quality Gate determines:
+
+> whether pipeline should continue.
+
+VERY important in CI/CD.
+
+---
+
+# PART 4 — SonarQube Workflow
+
+Understand this clearly.
+
+---
+
+# Full Flow
+
+```text id="sq3"
+Developer Pushes Code
+        ↓
+CI/CD Pipeline Starts
+        ↓
+SonarQube Scans Code
+        ↓
+Issues Found
+        ↓
+Quality Gate Result
+        ↓
+Pass / Fail
+```
+
+---
+
+# PART 5 — Sonar Scanner
+
+MOST IMPORTANT command.
+
+---
+
+# Scan Command
+
+```bash id="sq4"
+sonar-scanner
+```
+
+This starts code analysis.
+
+VERY HIGH probability MCQ.
+
+---
+
+# PART 6 — sonar-project.properties
+
+VERY IMPORTANT.
+
+SonarQube project configuration file.
+
+---
+
+# Example
+
+```properties id="sq5"
+sonar.projectKey=myapp
+
+sonar.projectName=My App
+
+sonar.sources=.
+```
+
+---
+
+# Understand Fields
+
+| Field             | Meaning           |
+| ----------------- | ----------------- |
+| sonar.projectKey  | unique project ID |
+| sonar.projectName | project name      |
+| sonar.sources     | source code path  |
+
+---
+
+# PART 7 — SonarQube + CI/CD Integration
+
+VERY HIGH probability.
+
+---
+
+# GitHub Actions Integration
+
+```yaml id="sq6"
+- name: SonarQube Scan
+  run: sonar-scanner
+```
+
+---
+
+# Full Example
+
+```yaml id="sq7"
+name: CI Pipeline
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  scan:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: SonarQube Scan
+        run: sonar-scanner
+```
+
+VERY important practical pattern.
+
+---
+
+# PART 8 — SonarQube Dashboard
+
+SonarQube dashboard shows:
+
+* bugs
+* vulnerabilities
+* code smells
+* coverage
+* duplications
+
+---
+
+# IMPORTANT METRICS
+
+| Metric       | Meaning             |
+| ------------ | ------------------- |
+| Coverage     | test coverage       |
+| Duplications | repeated code       |
+| Reliability  | bug risk            |
+| Security     | vulnerability level |
+
+---
+
+# PART 9 — MOST IMPORTANT SONARQUBE MCQs
+
+---
+
+## SonarQube is used for?
+
+Answer:
+
+* Static Code Analysis
+
+---
+
+## What is a Code Smell?
+
+Answer:
+
+* bad coding practice
+
+---
+
+## Which command starts SonarQube scan?
+
+Answer:
+
+```bash id="sq8"
+sonar-scanner
+```
+
+---
+
+## Quality Gate means?
+
+Answer:
+
+* pass/fail quality rules
+
+---
+
+## SonarQube detects?
+
+Answer:
+
+* bugs
+* vulnerabilities
+* code smells
+
+---
+
+# PART 10 — IMPORTANT EXAM OBSERVATION
+
+Your faculty will MOST likely ask:
+
+* theoretical MCQs
+* CI/CD integration syntax
+* purpose of SonarQube
+
+NOT:
+
+* deep Sonar server administration
+
+So focus on:
+
+* concepts
+* workflow
+* scanner command
+* pipeline integration
+
+---
+
+# NOW — OPA (OPEN POLICY AGENT)
+
+This is DevSecOps related.
+
+VERY important theory topic.
+
+---
+
+# PART 11 — What is OPA?
+
+OPA =
+
+# Open Policy Agent
+
+Used for:
+
+* policy enforcement
+* access control
+* security rules
+* compliance automation
+
+---
+
+# MOST IMPORTANT DEFINITION
+
+OPA:
+
+> Policy-as-Code engine.
+
+VERY HIGH probability MCQ.
+
+---
+
+# PART 12 — What is Policy-as-Code?
+
+Instead of manually checking security rules:
+
+* rules are written as code.
+
+Example:
+
+* who can access resource
+* deployment restrictions
+* container security policies
+
+---
+
+# REAL EXAMPLES
+
+OPA can enforce:
+
+```text id="opa1"
+Only admins can deploy
+Only approved Docker images allowed
+No privileged containers
+```
+
+---
+
+# PART 13 — OPA Workflow
+
+---
+
+# Full Flow
+
+```text id="opa2"
+Request/Input
+      ↓
+OPA Evaluates Policies
+      ↓
+ALLOW / DENY Decision
+```
+
+---
+
+# PART 14 — Rego Language (EXTREMELY IMPORTANT)
+
+OPA policies are written in:
+
+# Rego
+
+VERY HIGH probability MCQ.
+
+---
+
+# Example Rego Policy
+
+```rego id="opa3"
+package example
+
+default allow = false
+
+allow {
+  input.user == "admin"
+}
+```
+
+---
+
+# Understand This Carefully
+
+---
+
+# package
+
+```rego id="opa4"
+package example
+```
+
+Policy namespace.
+
+---
+
+# default
+
+```rego id="opa5"
+default allow = false
+```
+
+Default deny.
+
+VERY important security principle.
+
+---
+
+# allow rule
+
+```rego id="opa6"
+allow {
+  input.user == "admin"
+}
+```
+
+If user is admin:
+
+* allow access
+
+Else:
+
+* deny
+
+---
+
+# PART 15 — Another OPA Example
+
+VERY useful for understanding.
+
+---
+
+# Only HTTPS Allowed
+
+```rego id="opa7"
+package security
+
+default allow = false
+
+allow {
+  input.protocol == "https"
+}
+```
+
+---
+
+# PART 16 — OPA in DevOps
+
+OPA is commonly used with:
+
+* Kubernetes
+* CI/CD pipelines
+* Docker security
+* cloud governance
+
+---
+
+# VERY IMPORTANT EXAM CONCEPT
+
+OPA helps automate:
+
+# security and compliance policies
+
+---
+
+# PART 17 — OPA + CI/CD Integration
+
+VERY HIGH probability theoretical question.
+
+---
+
+# Example
+
+Pipeline checks:
+
+* Docker security
+* deployment policies
+* infrastructure rules
+
+before deployment.
+
+---
+
+# Example Flow
+
+```text id="opa8"
+Build App
+   ↓
+Run OPA Policies
+   ↓
+If policy passes → deploy
+Else → block deployment
+```
+
+---
+
+# PART 18 — OPA Keywords
+
+MOST IMPORTANT.
+
+| Keyword | Meaning         |
+| ------- | --------------- |
+| package | namespace       |
+| default | default value   |
+| allow   | policy decision |
+| deny    | block access    |
+| input   | incoming data   |
+
+---
+
+# PART 19 — MOST IMPORTANT OPA MCQs
+
+---
+
+## OPA full form?
+
+Answer:
+
+* Open Policy Agent
+
+---
+
+## OPA language?
+
+Answer:
+
+* Rego
+
+---
+
+## OPA is used for?
+
+Answer:
+
+* Policy-as-Code
+
+---
+
+## What does OPA return?
+
+Answer:
+
+* allow/deny decision
+
+---
+
+## default allow = false means?
+
+Answer:
+
+* deny by default
+
+VERY important security principle.
+
+---
+
+# PART 20 — SONARQUBE vs OPA
+
+VERY POSSIBLE MCQ.
+
+| SonarQube        | OPA                  |
+| ---------------- | -------------------- |
+| code quality     | policy enforcement   |
+| static analysis  | security/compliance  |
+| bugs/code smells | allow/deny decisions |
+
+---
+
+# PART 21 — VERY IMPORTANT COMBINED DEVOPS FLOW
+
+This is REAL industry pipeline.
+
+---
+
+# Full Pipeline
+
+```text id="finalflow1"
+Developer Pushes Code
+        ↓
+GitHub Actions Triggered
+        ↓
+Build Runs
+        ↓
+SonarQube Scan
+        ↓
+OPA Policy Validation
+        ↓
+Docker Image Build
+        ↓
+Deployment
+```
+
+THIS is probably the final mental picture your faculty expects.
+
+---
+
+# PART 22 — MOST IMPORTANT EXAM STRATEGY
+
+For SonarQube:
+Focus on:
+
+* static analysis
+* quality gates
+* scanner
+* CI/CD integration
+
+---
+
+For OPA:
+Focus on:
+
+* Policy-as-Code
+* Rego
+* allow/deny
+* security enforcement
+
+---
+
+# MOST IMPORTANT COMMANDS/KEYWORDS TO MEMORIZE
+
+---
+
+# SonarQube
+
+```bash id="sqfinal"
+sonar-scanner
+```
+
+---
+
+# GitHub Actions Integration
+
+```yaml id="sqfinal2"
+run: sonar-scanner
+```
+
+---
+
+# OPA
+
+```rego id="opafinal"
+default allow = false
+```
+
+---
+
+# MOST IMPORTANT FINAL OBSERVATION
+
+Your exam pattern is now VERY clear.
+
+Your faculty mainly wants:
+
+* Linux administration
+* Git workflows
+* Docker basics
+* CI/CD automation
+* DevSecOps concepts
+
+through:
+
+* practical command execution
+* workflow understanding
+* automation logic
+* verification steps
+
+NOT deep enterprise production engineering.
+
+That is GOOD for scoring full marks because the question patterns are predictable and repeatable.
