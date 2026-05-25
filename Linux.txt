@@ -1,0 +1,1500 @@
+Perfect. That’s the best way to prepare for this exam.
+
+We’ll go topic-by-topic deeply, focusing on:
+
+* concepts
+* commands
+* practical questions
+* exam tricks
+* likely HackerEarth patterns
+* MCQs
+* mini practice tasks
+
+We’ll start with the **most important topic for your exam**:
+
+# Linux Commands + Permissions + Shell Basics
+
+This topic alone can easily appear as:
+
+* a full 30-mark question
+* multiple MCQs
+* scripting-based automation task
+
+---
+
+# PART 1 — Understanding Linux for DevOps
+
+## What is Linux?
+
+Linux is:
+
+* an open-source operating system
+* command-line driven
+* widely used on servers and cloud systems
+* the backbone of DevOps infrastructure
+
+Most DevOps tools run on Linux:
+
+* Docker
+* Kubernetes
+* Jenkins
+* GitHub runners
+* CI/CD servers
+
+---
+
+# PART 2 — Linux File System Basics
+
+Linux is hierarchical.
+
+Example:
+
+```bash
+/
+├── home
+│   └── ubuntu
+├── etc
+├── var
+├── usr
+```
+
+---
+
+# Important Directories
+
+| Directory | Purpose         |
+| --------- | --------------- |
+| `/home`   | user files      |
+| `/etc`    | configuration   |
+| `/var`    | logs/data       |
+| `/usr`    | applications    |
+| `/tmp`    | temporary files |
+
+---
+
+# PART 3 — Navigation Commands
+
+These are fundamental.
+
+---
+
+# 1. pwd
+
+Print Working Directory
+
+```bash
+pwd
+```
+
+Example output:
+
+```bash
+/home/ubuntu/workspace
+```
+
+This command tells:
+
+> “Where am I currently?”
+
+---
+
+# 2. ls
+
+List files/folders
+
+```bash
+ls
+```
+
+---
+
+# 3. ls -la
+
+MOST IMPORTANT variant.
+
+```bash
+ls -la
+```
+
+Shows:
+
+* hidden files
+* permissions
+* owner
+* size
+
+Example:
+
+```bash
+drwxr-xr-x
+```
+
+We’ll decode this later.
+
+---
+
+# 4. cd
+
+Change directory
+
+```bash
+cd foldername
+```
+
+Go back:
+
+```bash
+cd ..
+```
+
+Go home:
+
+```bash
+cd ~
+```
+
+---
+
+# Mini Practice
+
+Suppose you're in:
+
+```bash
+/home/ubuntu
+```
+
+Question:
+Go to workspace folder.
+
+Answer:
+
+```bash
+cd workspace
+```
+
+---
+
+# PART 4 — File & Folder Commands
+
+EXTREMELY IMPORTANT.
+
+---
+
+# 1. mkdir
+
+Create directory
+
+```bash
+mkdir project
+```
+
+Create multiple:
+
+```bash
+mkdir dev test prod
+```
+
+---
+
+# 2. touch
+
+Create file
+
+```bash
+touch app.js
+```
+
+Multiple files:
+
+```bash
+touch file1.txt file2.txt
+```
+
+---
+
+# 3. Bulk File Creation (VERY IMPORTANT)
+
+High chance in exam.
+
+```bash
+touch doc{1..5}.txt
+```
+
+Creates:
+
+```bash
+doc1.txt
+doc2.txt
+doc3.txt
+doc4.txt
+doc5.txt
+```
+
+This is VERY important for HackerEarth questions.
+
+---
+
+# 4. rm
+
+Delete file
+
+```bash
+rm file.txt
+```
+
+Delete folder:
+
+```bash
+rm -rf folder
+```
+
+⚠️ Dangerous command.
+
+---
+
+# 5. cp
+
+Copy files
+
+```bash
+cp a.txt b.txt
+```
+
+Copy folder:
+
+```bash
+cp -r folder1 folder2
+```
+
+---
+
+# 6. mv
+
+Move or rename
+
+Rename:
+
+```bash
+mv old.txt new.txt
+```
+
+Move:
+
+```bash
+mv file.txt folder/
+```
+
+---
+
+# 7. cat
+
+Display file contents
+
+```bash
+cat file.txt
+```
+
+---
+
+# VERY IMPORTANT PRACTICAL FLOW
+
+Suppose question says:
+
+> Create a folder docs and inside it create 10 text files.
+
+Solution:
+
+```bash
+mkdir docs
+
+cd docs
+
+touch doc{1..10}.txt
+```
+
+---
+
+# PART 5 — Linux Permissions (MOST IMPORTANT SECTION)
+
+This is one of the highest probability topics.
+
+---
+
+# Permission Structure
+
+Example:
+
+```bash
+-rwxr-xr--
+```
+
+Breakdown:
+
+```bash
+- rwx r-x r--
+```
+
+| Section | Meaning |
+| ------- | ------- |
+| owner   | rwx     |
+| group   | r-x     |
+| public  | r--     |
+
+---
+
+# Permission Meanings
+
+| Symbol | Meaning |
+| ------ | ------- |
+| r      | read    |
+| w      | write   |
+| x      | execute |
+
+---
+
+# Numeric Permission System
+
+| Permission | Value |
+| ---------- | ----- |
+| r          | 4     |
+| w          | 2     |
+| x          | 1     |
+
+---
+
+# Example
+
+## rwx
+
+```text
+4 + 2 + 1 = 7
+```
+
+## r-x
+
+```text
+4 + 1 = 5
+```
+
+## r--
+
+```text
+4
+```
+
+So:
+
+```bash
+rwxr-xr--
+```
+
+becomes:
+
+```bash
+754
+```
+
+---
+
+# chmod Command
+
+Change permissions.
+
+Syntax:
+
+```bash
+chmod permission filename
+```
+
+---
+
+# MOST IMPORTANT chmods
+
+## 777
+
+```bash
+chmod 777 file.txt
+```
+
+Meaning:
+
+* everyone full access
+
+---
+
+## 755
+
+```bash
+chmod 755 script.sh
+```
+
+Meaning:
+
+* owner full
+* others read + execute
+
+VERY common.
+
+---
+
+## 644
+
+```bash
+chmod 644 file.txt
+```
+
+Meaning:
+
+* owner read/write
+* others read only
+
+VERY common.
+
+---
+
+# Symbolic chmod
+
+Instead of numbers.
+
+---
+
+# Add execute permission to owner
+
+```bash
+chmod u+x script.sh
+```
+
+---
+
+# Remove write from group
+
+```bash
+chmod g-w file.txt
+```
+
+---
+
+# Add read to others
+
+```bash
+chmod o+r file.txt
+```
+
+---
+
+# PART 6 — Understanding ls -la Output
+
+Example:
+
+```bash
+-rwxr-xr--
+```
+
+Breakdown:
+
+| Part | Meaning   |
+| ---- | --------- |
+| -    | file      |
+| d    | directory |
+| rwx  | owner     |
+| r-x  | group     |
+| r--  | public    |
+
+---
+
+# Example MCQ
+
+## What does chmod 755 mean?
+
+Answer:
+
+* Owner: rwx
+* Group: r-x
+* Others: r-x
+
+---
+
+# PART 7 — Shell Loops (VERY VERY IMPORTANT)
+
+HackerEarth LOVES this pattern.
+
+---
+
+# Basic Loop
+
+```bash
+for i in {1..5}
+do
+  echo $i
+done
+```
+
+Output:
+
+```bash
+1
+2
+3
+4
+5
+```
+
+---
+
+# Create Multiple Files Using Loop
+
+```bash
+for i in {1..10}
+do
+  touch file$i.txt
+done
+```
+
+Creates:
+
+* file1.txt
+* file2.txt
+* …
+* file10.txt
+
+---
+
+# PART 8 — MOST IMPORTANT EXAM PATTERN
+
+This EXACT style appeared in your sample paper.
+
+---
+
+# Example Problem
+
+Create:
+
+* doc1.txt to doc15.txt
+
+Apply special permissions to files divisible by 3.
+
+---
+
+# FULL SOLUTION
+
+```bash
+for i in {1..15}
+do
+  touch doc$i.txt
+
+  if (( i % 3 == 0 ))
+  then
+    chmod 764 doc$i.txt
+  else
+    chmod 640 doc$i.txt
+  fi
+done
+```
+
+---
+
+# Understand This Carefully
+
+## if condition
+
+```bash
+if (( i % 3 == 0 ))
+```
+
+Checks:
+
+> divisible by 3
+
+---
+
+# then
+
+Runs commands if condition true.
+
+---
+
+# else
+
+Runs otherwise.
+
+---
+
+# fi
+
+Ends if block.
+
+---
+
+# THIS TYPE IS VERY HIGH PROBABILITY
+
+They may change:
+
+* divisible by 2
+* divisible by 5
+* even/odd
+* naming pattern
+* permission values
+
+But logic stays SAME.
+
+---
+
+# PART 9 — grep & find
+
+Important for MCQs.
+
+---
+
+# grep
+
+Search text INSIDE files.
+
+```bash
+grep "hello" file.txt
+```
+
+---
+
+# find
+
+Search files/folders.
+
+```bash
+find . -name "*.txt"
+```
+
+---
+
+# PART 10 — Package Management
+
+---
+
+# Ubuntu
+
+```bash
+sudo apt update
+sudo apt install docker.io
+```
+
+---
+
+# RHEL/CentOS
+
+```bash
+yum install docker
+```
+
+---
+
+# PART 11 — Networking Commands
+
+Important for MCQs.
+
+---
+
+# ping
+
+```bash
+ping google.com
+```
+
+Checks connectivity.
+
+---
+
+# ip a
+
+Shows IP address.
+
+```bash
+ip a
+```
+
+---
+
+# curl
+
+Hit APIs/websites.
+
+```bash
+curl google.com
+```
+
+---
+
+# wget
+
+Download files.
+
+```bash
+wget url
+```
+
+---
+
+# HIGH PROBABILITY MCQs
+
+## Which command creates files?
+
+Answer:
+
+```bash
+touch
+```
+
+---
+
+## Which command changes permissions?
+
+Answer:
+
+```bash
+chmod
+```
+
+---
+
+## Which command searches inside files?
+
+Answer:
+
+```bash
+grep
+```
+
+---
+
+## Which command searches files?
+
+Answer:
+
+```bash
+find
+```
+
+---
+
+## chmod 777 means?
+
+Answer:
+Full permissions for everyone.
+
+---
+
+# PRACTICAL EXAM TIPS
+
+During Linux questions ALWAYS verify using:
+
+```bash
+ls
+ls -la
+pwd
+cat filename
+```
+
+---
+
+# YOUR MINI ASSIGNMENT (DO THIS YOURSELF)
+
+Try mentally or on terminal:
+
+---
+
+## Task 1
+
+Create folder:
+
+```bash
+practice
+```
+
+Inside it create:
+
+```bash
+test1.txt → test10.txt
+```
+
+---
+
+## Task 2
+
+Files divisible by 2:
+
+```bash
+chmod 755
+```
+
+Others:
+
+```bash
+chmod 644
+```
+
+---
+
+## Task 3
+
+Verify permissions using:
+
+```bash
+ls -la
+```
+
+---
+
+Reply with:
+
+* “done”
+  OR
+* the commands you used
+  OR
+* where you got stuck
+
+Then we’ll move to:
+
+
+
+Good. These new sample questions reveal some additional Linux admin topics that were NOT deeply covered earlier.
+
+Your teacher is clearly focusing on:
+
+* real Linux administration
+* user management
+* system audit commands
+* ownership management
+* verification commands
+
+These are VERY important now.
+
+Let’s identify ONLY the new things introduced here.
+
+---
+
+# NEW TOPICS INTRODUCED
+
+From these test cases, the new important topics are:
+
+| New Topic                | Importance     |
+| ------------------------ | -------------- |
+| whoami                   | HIGH           |
+| who                      | HIGH           |
+| w                        | HIGH           |
+| last                     | HIGH           |
+| uname                    | HIGH           |
+| hostname                 | HIGH           |
+| uptime                   | HIGH           |
+| groupadd                 | VERY HIGH      |
+| useradd                  | VERY HIGH      |
+| usermod                  | VERY HIGH      |
+| id command               | VERY HIGH      |
+| userdel                  | VERY HIGH      |
+| passwd file concepts     | Medium         |
+| chown                    | EXTREMELY HIGH |
+| ownership vs permissions | EXTREMELY HIGH |
+| www-data user/group      | HIGH           |
+
+These are now HIGH-PROBABILITY exam questions.
+
+---
+
+# TOPIC 1 — User/System Audit Commands
+
+These are NEW.
+
+---
+
+# 1. whoami
+
+Shows current logged-in username.
+
+```bash id="2hlgwv"
+whoami
+```
+
+Example output:
+
+```bash id="oh2f0m"
+ubuntu
+```
+
+---
+
+# Difference Between whoami and who
+
+## whoami
+
+Shows:
+
+> current user only
+
+---
+
+## who
+
+Shows:
+
+* all logged-in users
+* terminal sessions
+
+```bash id="7d2udq"
+who
+```
+
+Example:
+
+```bash id="f5r6pd"
+ubuntu pts/0
+aman   pts/1
+```
+
+---
+
+# 2. w Command
+
+VERY IMPORTANT.
+
+Shows:
+
+* logged-in users
+* what they are doing
+* uptime
+* load average
+
+```bash id="92zdrh"
+w
+```
+
+---
+
+# 3. last Command
+
+Shows login history.
+
+```bash id="2g50t0"
+last
+```
+
+Example:
+
+* previous logins
+* reboot history
+* logout history
+
+VERY likely MCQ.
+
+---
+
+# 4. uname
+
+System information.
+
+```bash id="xczllw"
+uname -a
+```
+
+Shows:
+
+* kernel
+* architecture
+* OS info
+
+---
+
+# 5. hostname
+
+Displays machine hostname.
+
+```bash id="z4d6mp"
+hostname
+```
+
+---
+
+# 6. uptime
+
+Shows:
+
+* how long system running
+* users count
+* load average
+
+```bash id="6jlwmz"
+uptime
+```
+
+---
+
+# VERY IMPORTANT SYSTEM AUDIT FLOW
+
+This exact pattern may come.
+
+---
+
+# FULL SOLUTION FLOW
+
+```bash id="jlwmzz"
+whoami
+
+who
+
+w
+
+last
+
+uname -a
+
+hostname
+
+uptime
+```
+
+Memorize this sequence.
+
+---
+
+# TOPIC 2 — GROUP MANAGEMENT (VERY IMPORTANT)
+
+This is NEW and HIGH probability now.
+
+---
+
+# Create Group
+
+```bash id="jlwmzz"
+sudo groupadd developers
+
+sudo groupadd qa
+```
+
+---
+
+# Verify Groups
+
+Most important command:
+
+```bash id="jlwmzz"
+cat /etc/group
+```
+
+OR
+
+```bash id="jlwmzz"
+getent group
+```
+
+---
+
+# Search Specific Group
+
+```bash id="jlwmzz"
+grep developers /etc/group
+```
+
+---
+
+# TOPIC 3 — USER MANAGEMENT (EXTREMELY IMPORTANT)
+
+This is BIG now.
+
+---
+
+# Create User
+
+```bash id="jlwmzz"
+sudo useradd aman
+```
+
+---
+
+# Create User With Home Directory
+
+```bash id="jlwmzz"
+sudo useradd -m aman
+```
+
+Usually safer.
+
+---
+
+# Add User to Group
+
+```bash id="jlwmzz"
+sudo usermod -aG developers aman
+```
+
+Breakdown:
+
+| Option | Meaning         |
+| ------ | --------------- |
+| -a     | append          |
+| -G     | secondary group |
+
+---
+
+# Example From Question
+
+```bash id="jlwmzz"
+sudo useradd -m aman
+sudo usermod -aG developers aman
+
+sudo useradd -m ritu
+sudo usermod -aG developers ritu
+
+sudo useradd -m karan
+sudo usermod -aG qa karan
+```
+
+---
+
+# Verify User Group
+
+VERY IMPORTANT.
+
+```bash id="jlwmzz"
+id aman
+```
+
+Example output:
+
+```bash id="jlwmzz"
+uid=1001(aman) gid=1001 groups=developers
+```
+
+HIGH chance in exam.
+
+---
+
+# TOPIC 4 — DELETE USER (VERY IMPORTANT)
+
+NEW topic.
+
+---
+
+# Delete User
+
+```bash id="jlwmzz"
+sudo userdel ritu
+```
+
+---
+
+# Delete User + Home Directory
+
+MOST IMPORTANT.
+
+```bash id="jlwmzz"
+sudo userdel -r ritu
+```
+
+---
+
+# Verify User Deleted
+
+```bash id="jlwmzz"
+id ritu
+```
+
+Expected:
+
+```text id="jlwmzz"
+no such user
+```
+
+Exactly mentioned in sample.
+
+---
+
+# IMPORTANT EXAM TRICK
+
+Before deleting:
+Question says:
+
+> Ensure she has no active sessions
+
+Possible check:
+
+```bash id="jlwmzz"
+who
+```
+
+OR
+
+```bash id="jlwmzz"
+w
+```
+
+---
+
+# TOPIC 5 — FILE OWNERSHIP (EXTREMELY IMPORTANT)
+
+This is VERY IMPORTANT and new.
+
+---
+
+# Ownership vs Permissions
+
+## Permissions
+
+Control:
+
+* read/write/execute
+
+Managed by:
+
+```bash id="jlwmzz"
+chmod
+```
+
+---
+
+## Ownership
+
+Controls:
+
+* who owns file
+
+Managed by:
+
+```bash id="jlwmzz"
+chown
+```
+
+---
+
+# chown Command
+
+Change owner.
+
+Syntax:
+
+```bash id="jlwmzz"
+sudo chown owner:group file
+```
+
+---
+
+# Example From Question
+
+```bash id="分快三"
+sudo chown www-data:www-data index.html
+```
+
+---
+
+# Verify Ownership
+
+```bash id="分快三"
+ls -l
+```
+
+Example:
+
+```text id="分快三"
+-rwxr-xr-x 1 www-data www-data index.html
+```
+
+VERY IMPORTANT.
+
+---
+
+# TOPIC 6 — www-data User
+
+This is a Linux web server user/group.
+
+Commonly used by:
+
+* Apache
+* Nginx
+
+Usually already exists in Ubuntu.
+
+---
+
+# COMPLETE FLOW FOR TEST CASE 2
+
+This is HIGHLY IMPORTANT.
+
+---
+
+# Step 1
+
+```bash id="分快三"
+cd ~
+
+touch index.html
+```
+
+---
+
+# Step 2
+
+```bash id="分快三"
+echo "<h1>Hello</h1>" > index.html
+```
+
+---
+
+# Step 3
+
+Check permissions:
+
+```bash id="分快三"
+ls -l index.html
+```
+
+---
+
+# Step 4
+
+Give full permissions:
+
+```bash id="分快三"
+chmod 777 index.html
+```
+
+Verify:
+
+```bash id="分快三"
+ls -l index.html
+```
+
+Expected:
+
+```text id="分快三"
+-rwxrwxrwx
+```
+
+---
+
+# Step 5
+
+Change ownership:
+
+```bash id="分快三"
+sudo chown www-data:www-data index.html
+```
+
+---
+
+# Step 6
+
+Set 755:
+
+```bash id="分快三"
+chmod 755 index.html
+```
+
+---
+
+# Step 7
+
+Verify final:
+
+```bash id="分快三"
+ls -l index.html
+```
+
+Expected:
+
+```text id="分快三"
+-rwxr-xr-x 1 www-data www-data index.html
+```
+
+---
+
+# MOST IMPORTANT NEW COMMANDS TO MEMORIZE
+
+```bash id="分快三"
+whoami
+who
+w
+last
+uname -a
+hostname
+uptime
+groupadd
+useradd
+usermod
+id
+userdel -r
+chown
+```
+
+---
+
+# VERY HIGH PROBABILITY MCQs NOW
+
+---
+
+## Which command shows current logged-in user?
+
+Answer:
+
+```bash id="分快三"
+whoami
+```
+
+---
+
+## Which command shows login history?
+
+Answer:
+
+```bash id="分快三"
+last
+```
+
+---
+
+## Which command changes ownership?
+
+Answer:
+
+```bash id="分快三"
+chown
+```
+
+---
+
+## Which command deletes user with home directory?
+
+Answer:
+
+```bash id="分快三"
+userdel -r
+```
+
+---
+
+## Which file stores group information?
+
+Answer:
+
+```text id="分快三"
+/etc/group
+```
+
+---
+
+# MOST IMPORTANT OBSERVATION ABOUT YOUR EXAM
+
+Your faculty is NOT asking deep DevOps engineering.
+
+They are focusing on:
+
+* Linux admin basics
+* command execution
+* automation
+* verification
+* practical terminal skills
+
+This is GOOD for scoring high because the questions are procedural and predictable.
+
+---
+
+Next, we should deeply prepare:
+
+# Git & GitHub practical workflows
+
+Because based on ALL samples, Git is definitely going to be one of the biggest sections.
+

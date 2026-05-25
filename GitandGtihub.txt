@@ -1,0 +1,809 @@
+Perfect.
+These samples tell us EXACTLY what your faculty expects in Git/GitHub practicals.
+
+Your Git section is now clearly focused on:
+
+| Topic                              | Probability    |
+| ---------------------------------- | -------------- |
+| Branch creation                    | VERY HIGH      |
+| Switching branches                 | VERY HIGH      |
+| Commits                            | VERY HIGH      |
+| Merge conflicts                    | EXTREMELY HIGH |
+| Conflict resolution                | EXTREMELY HIGH |
+| Merge commit messages              | HIGH           |
+| Git initialization                 | HIGH           |
+| File modifications across branches | VERY HIGH      |
+
+And yes — a 30-mark question can absolutely combine:
+
+* Git
+* GitHub workflow
+* Docker
+* CI/CD
+
+So we’ll master Git first.
+
+---
+
+# PART 1 — Understanding Git Properly
+
+## What is Git?
+
+Git is:
+
+* a Distributed Version Control System (DVCS)
+* used to track code changes
+* supports collaboration
+* allows branching and merging
+
+---
+
+# Real Industry Workflow
+
+```text
+main branch
+   |
+feature branch
+   |
+testing
+   |
+merge into main
+```
+
+Exactly what your samples are testing.
+
+---
+
+# PART 2 — Basic Git Workflow
+
+This is the CORE.
+
+---
+
+# Step 1 — Initialize Repository
+
+```bash id="qv9wx7"
+git init
+```
+
+Creates:
+
+```text
+.git
+```
+
+This hidden folder tracks Git history.
+
+---
+
+# Step 2 — Check Status
+
+MOST IMPORTANT COMMAND.
+
+```bash id="f5cl8f"
+git status
+```
+
+Shows:
+
+* modified files
+* staged files
+* branch info
+
+You should use this VERY frequently in exam.
+
+---
+
+# Step 3 — Add Files
+
+```bash id="ycwyf5"
+git add file.txt
+```
+
+Add all:
+
+```bash id="8rg2xe"
+git add .
+```
+
+---
+
+# Step 4 — Commit
+
+```bash id="a7z7tl"
+git commit -m "message"
+```
+
+Example:
+
+```bash id="xyy0bq"
+git commit -m "Initial commit"
+```
+
+---
+
+# MOST IMPORTANT CONCEPT
+
+## Git has 3 stages:
+
+```text
+Working Directory
+       ↓
+Staging Area
+       ↓
+Repository
+```
+
+---
+
+# Workflow
+
+```bash id="v4s93w"
+edit file
+→ git add .
+→ git commit -m "msg"
+```
+
+---
+
+# PART 3 — Branching (EXTREMELY IMPORTANT)
+
+This is the BIGGEST topic in your samples.
+
+---
+
+# Why Branches?
+
+Used for:
+
+* features
+* bug fixes
+* hotfixes
+* isolated development
+
+---
+
+# View Branches
+
+```bash id="z3zy44"
+git branch
+```
+
+Current branch has:
+
+```text
+*
+```
+
+Example:
+
+```text
+* main
+  login-feature
+```
+
+---
+
+# Create Branch
+
+```bash id="p4g5l2"
+git branch login-feature
+```
+
+---
+
+# Switch Branch
+
+```bash id="zhjx8j"
+git checkout login-feature
+```
+
+Modern version:
+
+```bash id="i8nrib"
+git switch login-feature
+```
+
+---
+
+# Create + Switch Together
+
+MOST IMPORTANT.
+
+```bash id="zjlwmz"
+git checkout -b login-feature
+```
+
+Modern:
+
+```bash id="jlwmzz"
+git switch -c login-feature
+```
+
+---
+
+# HIGH PROBABILITY MCQ
+
+## Which command creates and switches branch together?
+
+Answer:
+
+```bash id="jlwmzz"
+git checkout -b branchname
+```
+
+---
+
+# PART 4 — Understanding Branch Isolation
+
+VERY IMPORTANT concept.
+
+Suppose:
+
+## main branch
+
+```text
+login.txt
+→ Main implementation
+```
+
+---
+
+## login-feature branch
+
+```text
+login.txt
+→ Feature implementation
+```
+
+These changes are isolated UNTIL merge.
+
+This exact thing creates merge conflicts.
+
+---
+
+# PART 5 — Merge (EXTREMELY IMPORTANT)
+
+BIGGEST practical topic.
+
+---
+
+# Merge Syntax
+
+```bash id="jlwmzz"
+git merge branchname
+```
+
+Example:
+
+```bash id="分快三"
+git merge login-feature
+```
+
+This means:
+
+> merge login-feature INTO current branch
+
+---
+
+# IMPORTANT RULE
+
+You must be on:
+
+```text
+main
+```
+
+before:
+
+```bash id="分快三"
+git merge login-feature
+```
+
+---
+
+# PART 6 — Merge Conflict (MOST IMPORTANT TOPIC)
+
+THIS is clearly your faculty’s favorite topic.
+
+Both sample questions are conflict-resolution based.
+
+So understand deeply.
+
+---
+
+# WHY CONFLICT OCCURS
+
+Conflict happens when:
+
+* same file
+* same lines
+* modified differently
+* in different branches
+
+---
+
+# Example
+
+---
+
+## main branch
+
+```text
+Login Module: Main branch implementation
+```
+
+---
+
+## login-feature branch
+
+```text
+Login Module: Initial implementation
+```
+
+---
+
+When merging:
+Git gets confused.
+
+---
+
+# Conflict Markers
+
+Git adds:
+
+```text
+<<<<<<< HEAD
+Main branch implementation
+=======
+Feature implementation
+>>>>>>> login-feature
+```
+
+VERY IMPORTANT.
+
+---
+
+# HOW TO RESOLVE CONFLICT
+
+You manually edit file.
+
+---
+
+# Expected Final Content
+
+From your sample:
+
+```text
+Login Module: Initial implementation
+Login Module: Main branch implementation
+```
+
+---
+
+# Then:
+
+```bash id="分快三"
+git add login.txt
+
+git commit -m "LoginMergeResolved"
+```
+
+This finalizes merge.
+
+---
+
+# PART 7 — FULL SAMPLE QUESTION WALKTHROUGH
+
+VERY IMPORTANT.
+
+---
+
+# INITIAL SETUP
+
+```bash id="分快三"
+cd /home/ubuntu/code/project
+
+git init
+```
+
+---
+
+# CREATE BRANCHES
+
+```bash id="分快三"
+git branch main
+
+git branch login-feature
+```
+
+OR easier:
+
+```bash id="分快三"
+git checkout -b login-feature
+```
+
+---
+
+# LOGIN FEATURE BRANCH
+
+```bash id="分快三"
+git checkout login-feature
+```
+
+Create file:
+
+```bash id="分快三"
+echo "Login Module: Initial implementation" > login.txt
+```
+
+Commit:
+
+```bash id="分快三"
+git add .
+
+git commit -m "LoginFeatureCommit"
+```
+
+---
+
+# MAIN BRANCH
+
+```bash id="分快三"
+git checkout main
+```
+
+Modify:
+
+```bash id="分快三"
+echo "Login Module: Main branch implementation" > login.txt
+```
+
+Commit:
+
+```bash id="分快三"
+git add .
+
+git commit -m "MainLoginCommit"
+```
+
+---
+
+# MERGE
+
+```bash id="分快三"
+git merge login-feature
+```
+
+Conflict occurs.
+
+---
+
+# RESOLVE CONFLICT
+
+Edit file:
+
+```text
+Login Module: Initial implementation
+Login Module: Main branch implementation
+```
+
+---
+
+# FINALIZE
+
+```bash id="分快三"
+git add login.txt
+
+git commit -m "LoginMergeResolved"
+```
+
+DONE.
+
+---
+
+# PART 8 — Hotfix Workflow
+
+Same logic.
+
+Only terminology changes.
+
+---
+
+# Hotfix Meaning
+
+Emergency production fix.
+
+Industry standard practice:
+
+* create hotfix branch
+* fix issue
+* merge back
+
+---
+
+# Important Observation
+
+Faculty is repeatedly testing:
+
+* branching
+* conflicting modifications
+* manual merge resolution
+
+This means:
+
+> MERGE CONFLICTS are almost guaranteed in exam.
+
+---
+
+# PART 9 — MOST IMPORTANT GIT COMMANDS
+
+Memorize these.
+
+---
+
+# Initialize
+
+```bash id="分快三"
+git init
+```
+
+---
+
+# Status
+
+```bash id="分快三"
+git status
+```
+
+---
+
+# Add
+
+```bash id="分快三"
+git add .
+```
+
+---
+
+# Commit
+
+```bash id="分快三"
+git commit -m "msg"
+```
+
+---
+
+# Branches
+
+```bash id="分快三"
+git branch
+```
+
+---
+
+# Create + Switch
+
+```bash id="分快三"
+git checkout -b branch
+```
+
+---
+
+# Switch
+
+```bash id="分快三"
+git checkout branch
+```
+
+---
+
+# Merge
+
+```bash id="分快三"
+git merge branch
+```
+
+---
+
+# Log
+
+VERY IMPORTANT for verification.
+
+```bash id="分快三"
+git log --oneline
+```
+
+---
+
+# PART 10 — VERY IMPORTANT EXAM STRATEGY
+
+During Git questions ALWAYS do:
+
+---
+
+# 1. Check branch
+
+```bash id="分快三"
+git branch
+```
+
+---
+
+# 2. Check status
+
+```bash id="分快三"
+git status
+```
+
+---
+
+# 3. Verify commits
+
+```bash id="分快三"
+git log --oneline
+```
+
+---
+
+# 4. Verify file contents
+
+```bash id="分快三"
+cat filename
+```
+
+---
+
+# MOST IMPORTANT EXAM MISTAKES
+
+---
+
+# ❌ Forgetting git add
+
+Then commit fails.
+
+---
+
+# ❌ Merging from wrong branch
+
+Remember:
+
+```text
+Be on main
+THEN merge feature branch
+```
+
+---
+
+# ❌ Wrong conflict resolution order
+
+Faculty SPECIFICALLY mentions order.
+
+Follow EXACT order.
+
+---
+
+# ❌ Forgetting final commit after conflict resolution
+
+After resolving conflict:
+
+```bash id="分快三"
+git add .
+git commit -m "message"
+```
+
+---
+
+# VERY HIGH PROBABILITY MCQs
+
+---
+
+## Which command initializes repo?
+
+Answer:
+
+```bash id="分快三"
+git init
+```
+
+---
+
+## Which command shows branch list?
+
+Answer:
+
+```bash id="分快三"
+git branch
+```
+
+---
+
+## Which command merges branch?
+
+Answer:
+
+```bash id="分快三"
+git merge branch
+```
+
+---
+
+## Which command shows commit history?
+
+Answer:
+
+```bash id="分快三"
+git log --oneline
+```
+
+---
+
+## Why does merge conflict occur?
+
+Answer:
+
+* same file modified differently in multiple branches
+
+---
+
+# MOST IMPORTANT OBSERVATION
+
+Your Git questions are NOT advanced GitHub cloud questions.
+
+They are:
+
+* local Git workflows
+* terminal operations
+* conflict handling
+* branch management
+
+That means:
+
+* no deep GitHub UI
+* no PR workflows
+* mostly CLI practicals
+
+VERY scoreable.
+
+---
+
+# MINI PRACTICE TASK FOR YOU
+
+Try mentally:
+
+---
+
+# TASK
+
+1. Initialize repo
+2. Create branch:
+
+```text
+feature-auth
+```
+
+3. Create:
+
+```text
+auth.txt
+```
+
+4. Commit
+5. Modify same file in main
+6. Merge
+7. Resolve conflict
+8. Final commit
+
+---
+
+Reply with:
+
+* “done”
+  OR
+* your commands
+  OR
+* where confused
+
+Then we’ll move to:
+
+# Git Rebase, Revert, Reset, Squash (VERY IMPORTANT advanced Git operations)

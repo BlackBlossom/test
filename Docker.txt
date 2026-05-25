@@ -1,0 +1,764 @@
+Great. Now let’s deeply prepare:
+
+# Docker for DevOps Exam (Practical + MCQ + Workflow Focus)
+
+Based on your syllabus + exam pattern + Git-heavy samples, Docker is VERY likely to appear as:
+
+* standalone practical
+* CI/CD integration
+* deployment workflow
+* image/container operations
+* Dockerfile creation
+
+Your faculty will probably focus on:
+
+* commands
+* Dockerfile
+* running containers
+* ports
+* image building
+* container lifecycle
+
+NOT Kubernetes-level complexity.
+
+---
+
+# PART 1 — What is Docker?
+
+## Problem Before Docker
+
+Different systems behave differently:
+
+```text id="p1dock"
+Works on my machine ❌
+Fails on server ❌
+```
+
+---
+
+# Solution
+
+Docker packages:
+
+* app
+* dependencies
+* runtime
+* environment
+
+into a:
+
+# Container
+
+So app runs SAME everywhere.
+
+---
+
+# MOST IMPORTANT CONCEPT
+
+| Term       | Meaning                     |
+| ---------- | --------------------------- |
+| Image      | Blueprint/template          |
+| Container  | Running instance            |
+| Dockerfile | Instructions to build image |
+
+This is EXTREMELY important.
+
+---
+
+# PART 2 — Docker Architecture
+
+Understand this properly.
+
+---
+
+# Flow
+
+```text id="p2dock"
+Dockerfile
+    ↓
+Docker Image
+    ↓
+Docker Container
+```
+
+---
+
+# Example
+
+```text id="p3dock"
+Dockerfile → Nginx Image → Running Website Container
+```
+
+---
+
+# PART 3 — Install & Verify Docker
+
+Very common MCQ.
+
+---
+
+# Check Docker Version
+
+```bash id="d1dock"
+docker --version
+```
+
+---
+
+# Check Docker Running
+
+```bash id="d2dock"
+docker info
+```
+
+---
+
+# PART 4 — Docker Images
+
+VERY IMPORTANT.
+
+---
+
+# View Images
+
+```bash id="d3dock"
+docker images
+```
+
+Example output:
+
+```text id="d4dock"
+REPOSITORY   TAG       IMAGE ID
+nginx        latest    a1b2c3
+```
+
+---
+
+# Pull Image
+
+Downloads from Docker Hub.
+
+```bash id="d5dock"
+docker pull nginx
+```
+
+VERY IMPORTANT.
+
+---
+
+# PART 5 — Docker Containers (EXTREMELY IMPORTANT)
+
+---
+
+# Run Container
+
+```bash id="d6dock"
+docker run nginx
+```
+
+This:
+
+* creates container
+* starts container
+
+---
+
+# Detached Mode
+
+MOST IMPORTANT.
+
+```bash id="d7dock"
+docker run -d nginx
+```
+
+| Option | Meaning         |
+| ------ | --------------- |
+| -d     | background mode |
+
+---
+
+# List Running Containers
+
+```bash id="d8dock"
+docker ps
+```
+
+---
+
+# List ALL Containers
+
+```bash id="d9dock"
+docker ps -a
+```
+
+---
+
+# Stop Container
+
+```bash id="d10dock"
+docker stop container_id
+```
+
+---
+
+# Remove Container
+
+```bash id="d11dock"
+docker rm container_id
+```
+
+---
+
+# Remove Image
+
+```bash id="d12dock"
+docker rmi image_id
+```
+
+---
+
+# PART 6 — Port Mapping (VERY IMPORTANT)
+
+HIGH probability practical.
+
+---
+
+# Problem
+
+Container runs internally.
+
+Need external access.
+
+---
+
+# Solution
+
+Port mapping.
+
+---
+
+# Syntax
+
+```bash id="d13dock"
+docker run -p HOST:CONTAINER image
+```
+
+---
+
+# Example
+
+```bash id="d14dock"
+docker run -d -p 8080:80 nginx
+```
+
+Meaning:
+
+| Part | Meaning        |
+| ---- | -------------- |
+| 8080 | host port      |
+| 80   | container port |
+
+---
+
+# VERY IMPORTANT MCQ
+
+## Meaning of -p ?
+
+Answer:
+
+* Port mapping
+
+---
+
+# PART 7 — Naming Containers
+
+Instead of random IDs.
+
+---
+
+# Example
+
+```bash id="d15dock"
+docker run --name mynginx nginx
+```
+
+---
+
+# Stop By Name
+
+```bash id="d16dock"
+docker stop mynginx
+```
+
+---
+
+# PART 8 — Dockerfile (EXTREMELY IMPORTANT)
+
+THIS is probably the MOST important Docker topic.
+
+Very high chance in practicals.
+
+---
+
+# What is Dockerfile?
+
+A text file containing instructions to build Docker image.
+
+---
+
+# Basic Dockerfile
+
+```dockerfile id="d17dock"
+FROM node:18
+
+WORKDIR /app
+
+COPY . .
+
+RUN npm install
+
+CMD ["npm", "start"]
+```
+
+---
+
+# Understand Every Line
+
+---
+
+# FROM
+
+```dockerfile id="d18dock"
+FROM node:18
+```
+
+Base image.
+
+---
+
+# WORKDIR
+
+```dockerfile id="d19dock"
+WORKDIR /app
+```
+
+Working directory inside container.
+
+---
+
+# COPY
+
+```dockerfile id="d20dock"
+COPY . .
+```
+
+Copies project files.
+
+---
+
+# RUN
+
+```dockerfile id="d21dock"
+RUN npm install
+```
+
+Executes command during image build.
+
+---
+
+# CMD
+
+```dockerfile id="d22dock"
+CMD ["npm", "start"]
+```
+
+Runs when container starts.
+
+VERY IMPORTANT difference from RUN.
+
+---
+
+# RUN vs CMD
+
+| RUN        | CMD               |
+| ---------- | ----------------- |
+| build time | container runtime |
+
+HIGH probability MCQ.
+
+---
+
+# PART 9 — Build Docker Image
+
+MOST IMPORTANT practical command.
+
+---
+
+# Syntax
+
+```bash id="d23dock"
+docker build -t image_name .
+```
+
+---
+
+# Example
+
+```bash id="d24dock"
+docker build -t myapp .
+```
+
+| Part | Meaning           |
+| ---- | ----------------- |
+| -t   | tag/name          |
+| .    | current directory |
+
+---
+
+# Verify Image
+
+```bash id="d25dock"
+docker images
+```
+
+---
+
+# PART 10 — Run Built Image
+
+```bash id="d26dock"
+docker run -p 3000:3000 myapp
+```
+
+---
+
+# PART 11 — Container Logs
+
+VERY IMPORTANT.
+
+---
+
+# View Logs
+
+```bash id="d27dock"
+docker logs container_id
+```
+
+---
+
+# Follow Logs Live
+
+```bash id="d28dock"
+docker logs -f container_id
+```
+
+---
+
+# PART 12 — Execute Inside Container
+
+IMPORTANT.
+
+---
+
+# Open Shell
+
+```bash id="d29dock"
+docker exec -it container_id bash
+```
+
+| Option | Meaning              |
+| ------ | -------------------- |
+| -it    | interactive terminal |
+
+---
+
+# PART 13 — Docker Lifecycle
+
+VERY IMPORTANT CONCEPT.
+
+---
+
+# Full Flow
+
+```text id="d30dock"
+Dockerfile
+   ↓
+docker build
+   ↓
+Image
+   ↓
+docker run
+   ↓
+Container
+```
+
+---
+
+# PART 14 — MOST IMPORTANT PRACTICAL FLOWS
+
+These are HIGHLY likely.
+
+---
+
+# FLOW 1 — Run Nginx Server
+
+```bash id="d31dock"
+docker pull nginx
+
+docker run -d -p 8080:80 nginx
+```
+
+Verify:
+
+```bash id="d32dock"
+docker ps
+```
+
+---
+
+# FLOW 2 — Build Custom App
+
+---
+
+# Step 1
+
+Create Dockerfile.
+
+---
+
+# Step 2
+
+Build image:
+
+```bash id="d33dock"
+docker build -t myapp .
+```
+
+---
+
+# Step 3
+
+Run container:
+
+```bash id="d34dock"
+docker run -d -p 3000:3000 myapp
+```
+
+---
+
+# PART 15 — Docker + Git Combined Workflow
+
+VERY HIGH probability.
+
+---
+
+# Realistic Exam Pattern
+
+```text id="d35dock"
+1. Clone repo
+2. Switch branch
+3. Build Docker image
+4. Run container
+5. Verify logs
+```
+
+---
+
+# Example
+
+```bash id="d36dock"
+git clone repo
+
+cd repo
+
+git checkout feature
+
+docker build -t featureapp .
+
+docker run -d -p 8080:3000 featureapp
+```
+
+This EXACT style can appear.
+
+---
+
+# PART 16 — Important Docker MCQs
+
+---
+
+## Docker image is?
+
+Answer:
+
+* blueprint/template
+
+---
+
+## Docker container is?
+
+Answer:
+
+* running instance of image
+
+---
+
+## Which command builds image?
+
+Answer:
+
+```bash id="d37dock"
+docker build
+```
+
+---
+
+## Which command lists running containers?
+
+Answer:
+
+```bash id="d38dock"
+docker ps
+```
+
+---
+
+## Which command downloads image?
+
+Answer:
+
+```bash id="d39dock"
+docker pull
+```
+
+---
+
+## Difference between RUN and CMD?
+
+| RUN        | CMD     |
+| ---------- | ------- |
+| build time | runtime |
+
+---
+
+# PART 17 — VERY IMPORTANT EXAM TIPS
+
+---
+
+# ALWAYS VERIFY
+
+---
+
+# Check images
+
+```bash id="d40dock"
+docker images
+```
+
+---
+
+# Check containers
+
+```bash id="d41dock"
+docker ps
+```
+
+---
+
+# Check logs
+
+```bash id="d42dock"
+docker logs container
+```
+
+---
+
+# Check ports
+
+```bash id="d43dock"
+docker ps
+```
+
+(PORTS column)
+
+---
+
+# MOST COMMON EXAM MISTAKES
+
+---
+
+# ❌ Forgetting dot in build command
+
+Wrong:
+
+```bash id="d44dock"
+docker build -t myapp
+```
+
+Correct:
+
+```bash id="d45dock"
+docker build -t myapp .
+```
+
+---
+
+# ❌ Wrong port mapping order
+
+Correct:
+
+```bash id="d46dock"
+HOST:CONTAINER
+```
+
+---
+
+# ❌ Confusing image and container
+
+Remember:
+
+```text id="d47dock"
+Image → blueprint
+Container → running instance
+```
+
+---
+
+# ❌ CMD vs RUN confusion
+
+Very common MCQ.
+
+---
+
+# MOST IMPORTANT COMMANDS TO MEMORIZE
+
+```bash id="d48dock"
+docker images
+docker ps
+docker pull
+docker run
+docker stop
+docker rm
+docker build
+docker logs
+docker exec
+```
+
+---
+
+# MOST IMPORTANT OBSERVATION
+
+Your faculty’s pattern suggests:
+
+* procedural practicals
+* command execution
+* workflow understanding
+
+NOT deep Docker internals.
+
+So focus on:
+
+* commands
+* Dockerfile
+* image/container lifecycle
+* Git + Docker workflows
+
+That’s where marks are.

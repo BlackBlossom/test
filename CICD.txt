@@ -1,0 +1,807 @@
+Perfect.
+Now we move to one of the MOST IMPORTANT DevOps topics for your exam:
+
+# CI/CD using GitHub Actions
+
+Based on your syllabus + sample questions + DevOps pattern, this topic is VERY HIGH probability because it combines:
+
+* Git
+* automation
+* Docker
+* deployment workflows
+
+And your first sample already hinted at:
+
+* pipeline jobs
+* build automation
+* stages
+* execution logs
+
+So this topic can easily become:
+
+# a full 30-mark question
+
+---
+
+# PART 1 — What is CI/CD?
+
+This is the FOUNDATION.
+
+---
+
+# CI = Continuous Integration
+
+Developers continuously:
+
+* push code
+* run tests
+* validate builds
+
+Automatically.
+
+---
+
+# CD = Continuous Delivery / Deployment
+
+After successful CI:
+
+* app is packaged
+* deployed automatically
+
+---
+
+# SIMPLE FLOW
+
+```text id="cicd1"
+Developer Pushes Code
+        ↓
+GitHub Actions Triggered
+        ↓
+Build Runs
+        ↓
+Tests Run
+        ↓
+Docker Image Built
+        ↓
+Deployment
+```
+
+This whole process is:
+
+# CI/CD Pipeline
+
+---
+
+# MOST IMPORTANT EXAM CONCEPT
+
+CI/CD is:
+
+> automation of software build, test, and deployment.
+
+VERY HIGH probability MCQ.
+
+---
+
+# PART 2 — Why CI/CD?
+
+Without CI/CD:
+
+```text id="cicd2"
+Manual testing ❌
+Manual deployment ❌
+Human errors ❌
+Slow delivery ❌
+```
+
+---
+
+# With CI/CD
+
+```text id="cicd3"
+Automatic builds ✅
+Automatic testing ✅
+Faster deployment ✅
+Reliable releases ✅
+```
+
+---
+
+# PART 3 — What is GitHub Actions?
+
+GitHub Actions is:
+
+* GitHub’s CI/CD platform
+* workflow automation system
+
+Used for:
+
+* testing
+* builds
+* deployments
+* Docker automation
+* security scans
+
+---
+
+# MOST IMPORTANT CONCEPT
+
+GitHub Actions works using:
+
+# YAML workflow files
+
+VERY IMPORTANT.
+
+---
+
+# PART 4 — Workflow File Location
+
+EXTREMELY IMPORTANT.
+
+GitHub Actions workflows MUST be inside:
+
+```text id="cicd4"
+.github/workflows/
+```
+
+Example:
+
+```text id="cicd5"
+.github/workflows/main.yml
+```
+
+HIGH probability MCQ.
+
+---
+
+# PART 5 — Basic Workflow Structure (MOST IMPORTANT)
+
+MEMORIZE THIS.
+
+```yaml id="cicd6"
+name: CI Pipeline
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Install Dependencies
+        run: npm install
+
+      - name: Run Tests
+        run: npm test
+```
+
+This is the CORE structure.
+
+---
+
+# PART 6 — Understanding Every Section
+
+EXTREMELY IMPORTANT.
+
+---
+
+# 1. name
+
+```yaml id="cicd7"
+name: CI Pipeline
+```
+
+Workflow name.
+
+---
+
+# 2. on
+
+Trigger event.
+
+```yaml id="cicd8"
+on:
+  push:
+```
+
+Means:
+
+> run workflow when code is pushed
+
+---
+
+# Trigger Examples
+
+| Trigger           | Meaning     |
+| ----------------- | ----------- |
+| push              | code pushed |
+| pull_request      | PR created  |
+| workflow_dispatch | manual run  |
+
+---
+
+# HIGH probability MCQ
+
+## What does "on" mean?
+
+Answer:
+
+* workflow trigger
+
+---
+
+# 3. jobs
+
+Collection of tasks.
+
+```yaml id="cicd9"
+jobs:
+```
+
+---
+
+# 4. runs-on
+
+OS/environment.
+
+```yaml id="cicd10"
+runs-on: ubuntu-latest
+```
+
+VERY common.
+
+---
+
+# 5. steps
+
+Commands/actions executed sequentially.
+
+```yaml id="cicd11"
+steps:
+```
+
+---
+
+# 6. uses
+
+Uses predefined GitHub action.
+
+```yaml id="cicd12"
+uses: actions/checkout@v4
+```
+
+---
+
+# MOST IMPORTANT ACTION
+
+## Checkout Action
+
+```yaml id="cicd13"
+uses: actions/checkout@v4
+```
+
+This:
+
+* clones repository code into runner
+
+EXTREMELY IMPORTANT.
+
+---
+
+# 7. run
+
+Executes shell commands.
+
+```yaml id="cicd14"
+run: npm install
+```
+
+---
+
+# PART 7 — Workflow Execution Flow
+
+Understand this VERY clearly.
+
+---
+
+# Full Execution
+
+```text id="cicd15"
+Push Code
+   ↓
+GitHub detects push
+   ↓
+Workflow starts
+   ↓
+Runner machine created
+   ↓
+Steps execute
+   ↓
+Build/Test results generated
+```
+
+---
+
+# PART 8 — MOST IMPORTANT Practical Workflow
+
+VERY HIGH probability.
+
+---
+
+# Example Question
+
+> Create CI pipeline that:
+
+* runs on push
+* installs dependencies
+* prints “Build Successful”
+
+---
+
+# Solution
+
+```yaml id="cicd16"
+name: Build Pipeline
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install Dependencies
+        run: npm install
+
+      - name: Build
+        run: echo "Build Successful"
+```
+
+---
+
+# IMPORTANT OBSERVATION
+
+Your sample question included:
+
+```text id="cicd17"
+echo "Build Successful"
+```
+
+This means:
+
+* faculty focuses on workflow syntax
+* stages
+* automation logic
+
+NOT advanced production pipelines.
+
+---
+
+# PART 9 — Branch-Specific Workflows
+
+VERY IMPORTANT.
+
+---
+
+# Run only on main branch
+
+```yaml id="cicd18"
+on:
+  push:
+    branches:
+      - main
+```
+
+---
+
+# Run on multiple branches
+
+```yaml id="cicd19"
+on:
+  push:
+    branches:
+      - main
+      - develop
+```
+
+---
+
+# PART 10 — Multiple Jobs
+
+VERY IMPORTANT concept.
+
+---
+
+# Example
+
+```yaml id="cicd20"
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+  test:
+    runs-on: ubuntu-latest
+```
+
+---
+
+# Jobs can:
+
+* run parallel
+* depend on each other
+
+---
+
+# PART 11 — Job Dependencies
+
+VERY IMPORTANT.
+
+---
+
+# Example
+
+```yaml id="cicd21"
+test:
+  needs: build
+```
+
+Meaning:
+
+> run test AFTER build
+
+---
+
+# PART 12 — Environment Variables
+
+Common MCQ.
+
+---
+
+# Example
+
+```yaml id="cicd22"
+env:
+  NODE_ENV: production
+```
+
+---
+
+# Access Variable
+
+```yaml id="cicd23"
+run: echo $NODE_ENV
+```
+
+---
+
+# PART 13 — CI/CD + Docker (VERY HIGH PROBABILITY)
+
+This is where your exam may combine topics.
+
+---
+
+# Example Workflow
+
+```yaml id="cicd24"
+name: Docker Build
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  docker-build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Build Docker Image
+        run: docker build -t myapp .
+```
+
+EXTREMELY HIGH probability style.
+
+---
+
+# PART 14 — CI/CD + Git Workflow
+
+Possible exam flow:
+
+```text id="cicd25"
+1. Create feature branch
+2. Commit changes
+3. Push code
+4. Workflow triggers
+5. Build runs
+6. Docker image builds
+```
+
+This is REAL DevOps pipeline.
+
+---
+
+# PART 15 — Pipeline Stages
+
+Your sample used:
+
+> Build-Code stage
+
+This resembles Jenkins-style stages.
+
+Concept is SAME:
+
+* stages organize workflow
+
+---
+
+# Example
+
+```text id="cicd26"
+Build
+↓
+Test
+↓
+Deploy
+```
+
+---
+
+# PART 16 — Logs & Output
+
+VERY IMPORTANT.
+
+---
+
+# GitHub Actions generates logs for:
+
+* each step
+* each command
+
+Exactly like your sample:
+
+```text id="cicd27"
+build.log
+```
+
+---
+
+# PART 17 — YAML Syntax Rules (EXTREMELY IMPORTANT)
+
+MOST COMMON EXAM FAILURE.
+
+---
+
+# YAML depends on indentation.
+
+Correct:
+
+```yaml id="cicd28"
+jobs:
+  build:
+    runs-on: ubuntu-latest
+```
+
+Wrong indentation = workflow failure.
+
+---
+
+# IMPORTANT RULE
+
+Use:
+
+```text id="cicd29"
+2 spaces
+```
+
+NOT tabs.
+
+---
+
+# PART 18 — MOST IMPORTANT GitHub Actions Keywords
+
+MEMORIZE THESE.
+
+| Keyword | Meaning           |
+| ------- | ----------------- |
+| name    | workflow name     |
+| on      | trigger           |
+| jobs    | task collection   |
+| runs-on | OS                |
+| steps   | execution steps   |
+| uses    | predefined action |
+| run     | shell command     |
+| needs   | dependency        |
+
+---
+
+# PART 19 — HIGH PROBABILITY MCQs
+
+---
+
+## CI full form?
+
+Answer:
+
+* Continuous Integration
+
+---
+
+## CD full form?
+
+Answer:
+
+* Continuous Delivery/Deployment
+
+---
+
+## GitHub Actions workflow location?
+
+Answer:
+
+```text id="cicd30"
+.github/workflows/
+```
+
+---
+
+## Which keyword defines trigger?
+
+Answer:
+
+```yaml id="cicd31"
+on
+```
+
+---
+
+## Which action checks out repository code?
+
+Answer:
+
+```yaml id="cicd32"
+actions/checkout
+```
+
+---
+
+## Which keyword executes shell commands?
+
+Answer:
+
+```yaml id="cicd33"
+run
+```
+
+---
+
+# PART 20 — MOST IMPORTANT EXAM STRATEGY
+
+If workflow question appears:
+
+---
+
+# ALWAYS INCLUDE
+
+```yaml id="cicd34"
+name
+on
+jobs
+runs-on
+steps
+```
+
+---
+
+# ALWAYS VERIFY
+
+* indentation
+* branch names
+* command syntax
+* quotes
+* spacing
+
+---
+
+# COMMON EXAM MISTAKES
+
+---
+
+# ❌ Wrong YAML indentation
+
+MOST common.
+
+---
+
+# ❌ Forgetting checkout action
+
+Then repository code unavailable.
+
+---
+
+# ❌ Wrong branch trigger
+
+---
+
+# ❌ Using tabs instead of spaces
+
+---
+
+# ❌ Forgetting dot in docker build
+
+```bash id="cicd35"
+docker build -t app .
+```
+
+---
+
+# MOST IMPORTANT PRACTICAL PATTERNS NOW
+
+Your faculty is likely to ask:
+
+---
+
+# Pattern 1
+
+Simple build workflow
+
+---
+
+# Pattern 2
+
+Docker image build pipeline
+
+---
+
+# Pattern 3
+
+Branch-based workflow
+
+---
+
+# Pattern 4
+
+Build + Test stages
+
+---
+
+# Pattern 5
+
+Git + Docker + CI combined workflow
+
+VERY HIGH probability.
+
+---
+
+# MOST IMPORTANT COMMANDS/CONCEPTS TO REMEMBER
+
+```yaml id="cicd36"
+on:
+jobs:
+steps:
+uses:
+run:
+```
+
+And:
+
+```bash id="cicd37"
+docker build
+git checkout
+git merge
+```
+
+because integration questions are likely.

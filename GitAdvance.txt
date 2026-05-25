@@ -1,0 +1,695 @@
+Perfect. Now we move to the MOST IMPORTANT advanced Git operations for your exam.
+
+Based on your samples, these topics are HIGH probability:
+
+| Topic                  | Probability    |
+| ---------------------- | -------------- |
+| git revert             | VERY HIGH      |
+| git rebase             | VERY HIGH      |
+| squash commits         | EXTREMELY HIGH |
+| git reset              | HIGH           |
+| commit cleanup         | VERY HIGH      |
+| clean history workflow | VERY HIGH      |
+
+Your faculty is clearly testing:
+
+> “Can you manage Git history properly?”
+
+This is real DevOps workflow.
+
+---
+
+# PART 1 — Git Commit History
+
+Before advanced operations, understand history.
+
+---
+
+# View Commit History
+
+```bash id="5ng70k"
+git log
+```
+
+Compact version:
+
+```bash id="h7i9mt"
+git log --oneline
+```
+
+Example:
+
+```text id="vz6ymq"
+a1b2c3 Add docs
+d4e5f6 Add config
+g7h8i9 Update examples
+```
+
+MOST IMPORTANT verification command.
+
+Use frequently in exam.
+
+---
+
+# PART 2 — Git Revert (EXTREMELY IMPORTANT)
+
+This already appeared in your sample paper.
+
+---
+
+# What is git revert?
+
+It:
+
+* undoes a commit
+* WITHOUT deleting history
+* creates a NEW reverse commit
+
+SAFE operation.
+
+---
+
+# Syntax
+
+```bash id="0i5d63"
+git revert commit_id
+```
+
+---
+
+# Example
+
+Suppose:
+
+```text id="njlwmz"
+Add temporary configuration
+```
+
+was bad.
+
+Run:
+
+```bash id="2jlwmz"
+git revert d4e5f6
+```
+
+Git creates:
+
+```text id="3jlwmz"
+Revert "Add temporary configuration"
+```
+
+Exactly like your sample.
+
+---
+
+# IMPORTANT CONCEPT
+
+## Revert DOES NOT remove commit
+
+Instead:
+
+```text id="4jlwmz"
+Old Commit
++
+New Reverse Commit
+```
+
+---
+
+# Verify
+
+```bash id="5jlwmz"
+git log --oneline
+```
+
+---
+
+# VERY HIGH PROBABILITY QUESTION
+
+Your exact sample:
+
+```text id="6jlwmz"
+Revert:
+Add temporary configuration
+```
+
+Expected:
+
+```text id="7jlwmz"
+Revert "Add temporary configuration"
+```
+
+This almost guarantees a revert question.
+
+---
+
+# PART 3 — Git Reset
+
+VERY IMPORTANT difference from revert.
+
+---
+
+# What is git reset?
+
+Moves HEAD backward.
+
+Can:
+
+* uncommit changes
+* remove commits
+* remove staging
+
+---
+
+# Types of Reset
+
+| Type    | Effect            |
+| ------- | ----------------- |
+| --soft  | keep changes      |
+| --mixed | unstage changes   |
+| --hard  | delete everything |
+
+---
+
+# Soft Reset
+
+```bash id="8jlwmz"
+git reset --soft HEAD~1
+```
+
+Removes last commit BUT keeps changes staged.
+
+---
+
+# Hard Reset
+
+```bash id="9jlwmz"
+git reset --hard HEAD~1
+```
+
+DANGEROUS.
+
+Deletes:
+
+* commit
+* file changes
+
+---
+
+# VERY IMPORTANT DIFFERENCE
+
+| Revert                 | Reset            |
+| ---------------------- | ---------------- |
+| safe                   | destructive      |
+| keeps history          | rewrites history |
+| creates reverse commit | removes commits  |
+
+HIGH probability MCQ.
+
+---
+
+# PART 4 — Git Rebase (VERY IMPORTANT)
+
+This is a BIG DevOps workflow concept.
+
+---
+
+# What is Rebase?
+
+Moves branch commits on top of another branch.
+
+Creates:
+
+* cleaner history
+* linear history
+
+---
+
+# Merge vs Rebase
+
+| Merge                | Rebase          |
+| -------------------- | --------------- |
+| creates merge commit | cleaner history |
+| branching graph      | linear history  |
+
+---
+
+# Example
+
+Suppose:
+
+```text id="ajlwmz"
+main:
+A---B
+
+feature:
+     C---D
+```
+
+After rebase:
+
+```text id="bjlwmz"
+A---B---C---D
+```
+
+---
+
+# Rebase Command
+
+```bash id="cjlwmz"
+git rebase main
+```
+
+Usually done from feature branch.
+
+---
+
+# IMPORTANT
+
+Rebase can ALSO create conflicts.
+
+Resolve similarly:
+
+* edit file
+* git add .
+* continue rebase
+
+---
+
+# Continue Rebase
+
+```bash id="djlwmz"
+git rebase --continue
+```
+
+---
+
+# Abort Rebase
+
+```bash id="ejlwmz"
+git rebase --abort
+```
+
+---
+
+# PART 5 — Interactive Rebase (EXTREMELY IMPORTANT)
+
+THIS is probably the MOST important advanced Git topic for your exam.
+
+Because your sample already included:
+
+> squash commits
+
+And squash is done using:
+
+```bash id="fjlwmz"
+git rebase -i
+```
+
+---
+
+# PART 6 — Squashing Commits
+
+VERY VERY IMPORTANT.
+
+---
+
+# What is Squash?
+
+Combine multiple commits into one.
+
+Used for:
+
+* clean history
+* combining related work
+
+---
+
+# Example
+
+Current history:
+
+```text id="gjlwmz"
+Add docs
+Improve docs
+Fix docs
+```
+
+After squash:
+
+```text id="hjlwmz"
+Documentation updates
+```
+
+---
+
+# EXACT SAMPLE QUESTION
+
+Your sample said:
+
+```text id="ijlwmz"
+Squash:
+Commit 1 + Commit 3
+```
+
+New message:
+
+```text id="jjlwmz"
+Documentation updates
+```
+
+So this topic is ALMOST guaranteed.
+
+---
+
+# Squash Command
+
+```bash id="kjlwmz"
+git rebase -i HEAD~3
+```
+
+Means:
+
+> interactively edit last 3 commits
+
+---
+
+# Editor Opens
+
+Example:
+
+```text id="ljlwmz"
+pick a1 Add docs
+pick b2 Temp config
+pick c3 Improve docs
+```
+
+---
+
+# Change To
+
+```text id="mjlwmz"
+pick a1 Add docs
+pick b2 Temp config
+squash c3 Improve docs
+```
+
+This combines commit 3 into commit 1.
+
+---
+
+# Then Git asks for new commit message
+
+Set:
+
+```text id="njlwmz"
+Documentation updates
+```
+
+DONE.
+
+---
+
+# PART 7 — Full Sample Workflow
+
+VERY IMPORTANT.
+
+---
+
+# Step 1 — Create Branch
+
+```bash id="ojlwmz"
+git checkout -b release-cleanup
+```
+
+---
+
+# Step 2 — Commit 1
+
+```bash id="pjlwmz"
+echo "Added documentation" >> README.md
+
+git add .
+
+git commit -m "Add project docs"
+```
+
+---
+
+# Step 3 — Commit 2
+
+```bash id="qjlwmz"
+echo "Temporary configs" > config.txt
+
+git add .
+
+git commit -m "Add temporary configuration"
+```
+
+---
+
+# Step 4 — Commit 3
+
+```bash id="rjlwmz"
+echo "Updated examples" >> README.md
+
+git add .
+
+git commit -m "Improve documentation examples"
+```
+
+---
+
+# Step 5 — Squash
+
+```bash id="sjlwmz"
+git rebase -i HEAD~3
+```
+
+Modify:
+
+* commit 3 → squash
+
+New message:
+
+```text id="tjlwmz"
+Documentation updates
+```
+
+---
+
+# Step 6 — Revert Config Commit
+
+```bash id="ujlwmz"
+git revert commit_id
+```
+
+---
+
+# Final History
+
+```text id="vjlwmz"
+Documentation updates
+Revert "Add temporary configuration"
+```
+
+Exactly as sample expected.
+
+---
+
+# PART 8 — VERY IMPORTANT VERIFICATION COMMANDS
+
+ALWAYS use these in exam.
+
+---
+
+# Check Current Branch
+
+```bash id="wjlwmz"
+git branch
+```
+
+---
+
+# Check Status
+
+```bash id="xjlwmz"
+git status
+```
+
+---
+
+# Check Commit History
+
+```bash id="yjlwmz"
+git log --oneline
+```
+
+---
+
+# View File Contents
+
+```bash id="zjlwmz"
+cat filename
+```
+
+---
+
+# PART 9 — MOST IMPORTANT GIT MCQs
+
+---
+
+## Which command combines commits?
+
+Answer:
+
+```bash id="aajlwmz"
+git rebase -i
+```
+
+---
+
+## Which command safely undoes commit?
+
+Answer:
+
+```bash id="abjlwmz"
+git revert
+```
+
+---
+
+## Which reset is dangerous?
+
+Answer:
+
+```bash id="acjlwmz"
+git reset --hard
+```
+
+---
+
+## Which creates linear history?
+
+Answer:
+
+* rebase
+
+---
+
+## Which command shows compact commit history?
+
+Answer:
+
+```bash id="adjlwmz"
+git log --oneline
+```
+
+---
+
+# PART 10 — VERY IMPORTANT EXAM STRATEGY
+
+Your faculty LOVES:
+
+* exact commit messages
+* exact file content
+* exact branch names
+
+So ALWAYS:
+
+* copy names carefully
+* maintain capitalization
+* verify after each step
+
+---
+
+# Common Exam Mistakes
+
+---
+
+# ❌ Wrong branch before merge/rebase
+
+Always verify:
+
+```bash id="aejlwmz"
+git branch
+```
+
+---
+
+# ❌ Forgetting git add after conflict resolution
+
+Must do:
+
+```bash id="afjlwmz"
+git add .
+```
+
+---
+
+# ❌ Forgetting final commit after merge conflict
+
+---
+
+# ❌ Wrong squash target
+
+Carefully choose:
+
+* pick
+* squash
+
+---
+
+# ❌ Wrong commit message
+
+Faculty may auto-check exact strings.
+
+---
+
+# MOST IMPORTANT COMMANDS SO FAR
+
+```bash id="agjlwmz"
+git init
+git status
+git add .
+git commit -m
+git branch
+git checkout -b
+git merge
+git revert
+git reset
+git rebase
+git rebase -i
+git log --oneline
+```
+
+---
+
+# BIG OBSERVATION
+
+Your Git section now strongly resembles:
+
+* real CI/CD team workflows
+* feature development
+* hotfix management
+* release cleanup
+
+This means your Docker + CI/CD questions will likely integrate with Git branches.
+
+Example future question:
+
+* clone repo
+* switch branch
+* build Docker image
+* run pipeline
+
+So mastering Git first is absolutely correct.
+
+---
+
+Next best topic:
+
+# Docker Deep Dive (practical-heavy exam prep)
+
+because this is the most likely topic to combine with Git/GitHub in a 30-mark question.
